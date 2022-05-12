@@ -6,6 +6,9 @@ import Carrinho from "./components/Carrinho";
 
 import jproducts from "./data/products.json";
 
+
+
+
 class App extends React.Component {
   state = {
     products: jproducts,
@@ -14,6 +17,7 @@ class App extends React.Component {
       maxPrice: "",
       name: "",
     },
+    carrinho:[]
   };
 
   updateMinPrice = (ev) => {
@@ -31,8 +35,15 @@ class App extends React.Component {
       filters: { ...this.state.filters, name: ev.target.value },
     });
   };
+  addItem = (item) => {
+    this.setState({
+      carrinho: [... this.state.carrinho, item]
+    })
+  }
+
 
   render() {
+    console.log(this.state.carrinho)
     return (
       <div>
         <Filtros
@@ -41,7 +52,10 @@ class App extends React.Component {
           updateMaxPrice={this.updateMaxPrice}
           updateName={this.updateName}
         />
-        <Produtos products={this.state.products} filters={this.state.filters} />
+        <Produtos 
+        products={this.state.products} 
+        filters={this.state.filters} 
+        addItem={this.addItem}/>
         <Carrinho />
       </div>
     );
