@@ -2,26 +2,30 @@ import React from "react";
 import { Container } from "./styles";
 
 export default function Filtros(props) {
+  const [minPrice, updateMinPrice] = props.minPrice;
+  const [maxPrice, updateMaxPrice] = props.maxPrice;
+  const [queryName, updateQueryName] = props.queryName;
+
   return (
     <Container>
       <h2>Filtros</h2>
       <input
         type="number"
         placeholder="Valor mínimo"
-        value={props.filters.minPrice}
-        onChange={props.updateMinPrice}
+        value={minPrice}
+        onChange={updateMinPrice}
       />
       <input
         type="number"
         placeholder="Valor máximo"
-        value={props.filters.maxPrice}
-        onChange={props.updateMaxPrice}
+        value={maxPrice}
+        onChange={updateMaxPrice}
       />
       <input
         type="text"
         placeholder="Buscar por nome"
-        value={props.filters.name}
-        onChange={props.updateName}
+        value={queryName}
+        onChange={updateQueryName}
       />
     </Container>
   );

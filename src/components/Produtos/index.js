@@ -1,16 +1,13 @@
 import React from "react";
 import { Container } from "./styles";
-import styled from 'styled-components'
+import styled from "styled-components";
 
-const Card = styled.div`
- 
-`
+const Card = styled.div``;
 
 const ImgProduto = styled.img`
-    height: 100%;
-    width: 150px;
-`
-
+  height: 100%;
+  width: 150px;
+`;
 
 export default class Produtos extends React.Component {
   render() {
@@ -20,7 +17,7 @@ export default class Produtos extends React.Component {
           .filter((product) => {
             return (
               product.value >= this.props.filters.minPrice ||
-              this.props.filters.minPrice === "" 
+              this.props.filters.minPrice === ""
             );
           })
           .filter((product) => {
@@ -33,23 +30,21 @@ export default class Produtos extends React.Component {
             return (
               product.name
                 .toUpperCase()
-                .includes(this.props.filters.name.toUpperCase()) ||
-              this.props.filters.name === ""
+                .includes(this.props.filters.queryName.toUpperCase()) ||
+              this.props.filters.queryName === ""
             );
           })
           .map((product) => (
             // Componente <Produto />
 
-            
-              <Card key={product.id}>
-                <ImgProduto 
-                    src={product.imageUrl}
-                />
-                <p>{product.name}</p>
-                <p>R${product.value},00</p>
-                <button onClick={() => this.props.addItem(product)}>Adicionar ao Carrinho</button>
+            <Card key={product.id}>
+              <ImgProduto src={product.imageUrl} />
+              <p>{product.name}</p>
+              <p>R${product.value},00</p>
+              <button onClick={() => this.props.addItem(product)}>
+                Adicionar ao Carrinho
+              </button>
             </Card>
-            
           ))}
       </Container>
     );
