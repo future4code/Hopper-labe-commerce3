@@ -41,7 +41,10 @@ export default class Produtos extends React.Component {
               <ImgProduto src={product.imageUrl} />
               <p>{product.name}</p>
               <p>R${product.value},00</p>
-              <button onClick={() => this.props.addItem(product)}>
+              {/* <button onClick={() => this.props.addItem(product)}> */}
+              <button
+                onClick={() => this.props.adicionarProdutoNoCarrinho(product)}
+              >
                 Adicionar ao Carrinho
               </button>
             </Card>

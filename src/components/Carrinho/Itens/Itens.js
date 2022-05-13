@@ -7,6 +7,7 @@ class Itens extends React.Component {
       <ConjuntoDeItens>
         <p>{this.props.quantidade}x</p>
         <p>{this.props.nome}</p>
+        <p>{this.props.valor}</p>
         <button onClick={this.props.onClick}>Remover</button>
       </ConjuntoDeItens>
     );
