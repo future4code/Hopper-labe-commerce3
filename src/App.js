@@ -60,19 +60,30 @@ class App extends React.Component {
       });
     }
   };
-
-  removeItemFromCart = (produtoParaRemover) => {
-    console.log(produtoParaRemover);
-    const novoCarrinho = this.state.carrinho.filter((produto) => {
-      if (produto.id !== produtoParaRemover.id) {
-        return produto;
-      } else {
-        return false;
-      }
-    });
-    this.setState({
-      carrinho: novoCarrinho,
-    });
+  removeItemFromCart = (itemParaRemover) => {
+    if (itemParaRemover.quantidade === 1) {
+      const novoCarrinho = this.state.carrinho.filter((item) => {
+        if (item.id !== itemParaRemover.id) {
+          return item;
+        } else {
+          return false;
+        }
+      });
+      this.setState({
+        carrinho: novoCarrinho,
+      });
+    } else {
+      const novoCarrinho = this.state.carrinho.map((item) => {
+        if (itemParaRemover.id === item.id && item.quantidade >= 1) {
+          return { ...item, quantidade: item.quantidade - 1 };
+        } else {
+          return item;
+        }
+      });
+      this.setState({
+        carrinho: novoCarrinho,
+      });
+    }
   };
 
   render() {
