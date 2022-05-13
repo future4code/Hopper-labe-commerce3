@@ -41,6 +41,62 @@ class App extends React.Component {
     })
   }
 
+  adicionarProdutoNoCarrinho = (produto) => {
+    const produtoNoCarrinho = this.state.carrinho.filter((item) => {
+      if (item.id === produto.id) {
+        return item;
+      }else{
+        return false
+      }
+    });
+
+    if (produtoNoCarrinho.length === 0) {
+      produto.quantidade = 1;
+      const novoCarrinho = [produto, ...this.state.carrinho];
+      this.setState({
+        carrinho: novoCarrinho,
+      });
+    } else {
+      const novoCarrinho = this.state.carrinho.map((item) => {
+        if (produto.id === item.id) {
+          return { ...item, quantidade: item.quantidade + 1 };
+        } else {
+          return item;
+        }
+      });
+
+      this.setState({
+        carrinho: novoCarrinho,
+      });
+    }
+    this.adicionarValorTotal(produto.price);
+  };
+
+  removeItemFromCart = (itemParaRemover) => {
+    if (itemParaRemover.quantidade === 1) {
+      const novoCarrinho = this.state.carrinho.filter((item) => {
+        if (item.id !== itemParaRemover.id) {
+          return item;
+        }else{
+          return false
+        }
+      });
+      this.setState({
+        carrinho: novoCarrinho,
+      });
+    } else {
+      const novoCarrinho = this.state.carrinho.map((item) => {
+        if (itemParaRemover.id === item.id && item.quantidade >= 1) {
+          return { ...item, quantidade: item.quantidade - 1 };
+        } else {
+          return item;
+        }
+      });
+      this.setState({
+        carrinho: novoCarrinho,
+      });
+    }
+  };
 
   render() {
     console.log(this.state.carrinho)
@@ -56,7 +112,12 @@ class App extends React.Component {
         products={this.state.products} 
         filters={this.state.filters} 
         addItem={this.addItem}/>
-        <Carrinho />
+        
+        <Carrinho
+          carrinho={this.state.carrinho}
+          valorTotal={this.state.valorTotal}
+          removerItemDoCarrinho={this.removerItemDoCarrinho}
+        />
       </div>
     );
   }
