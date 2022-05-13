@@ -8,7 +8,7 @@ class Carrinho extends React.Component {
     const itensDoCarrinho =
       this.props.carrinho &&
       this.props.carrinho.map((item) => {
-        valorTotal += item.value;
+        valorTotal += item.value * item.quantidade;
         return (
           <Itens
             key={item.id}
