@@ -1,21 +1,11 @@
 import React from "react";
-import { Container } from "./styles";
-import styled from "styled-components";
-
-const Card = styled.div``;
-
-const ImgProdutoContainer = styled.div`
-  height: 200px;
-  width: 200px;
-  padding: 10px;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-`;
-
-const ImgProduto = styled.img`
-  height: 200px;
-`;
+import {
+  Container,
+  Card,
+  ImgProdutoContainer,
+  ImgProduto,
+  ButtonAdd,
+} from "./styles";
 
 export default class Produtos extends React.Component {
   render() {
@@ -50,13 +40,13 @@ export default class Produtos extends React.Component {
                 />
               </ImgProdutoContainer>
 
-              <p>{product.name}</p>
-              <p>R${product.value},00</p>
-              <button
+              <span>{product.name}</span>
+              <span>R${product.value},00</span>
+              <ButtonAdd
                 onClick={() => this.props.adicionarProdutoNoCarrinho(product)}
               >
                 Adicionar ao Carrinho
-              </button>
+              </ButtonAdd>
             </Card>
           ))}
       </Container>

@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./data/imgs/wpp.jpg");
+  background-size: 100% 120%;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
 }
 
 code {

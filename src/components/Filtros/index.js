@@ -8,7 +8,6 @@ export default function Filtros(props) {
 
   return (
     <Container>
-      <h2>Filtros</h2>
       <input
         type="number"
         placeholder="Valor mínimo"
