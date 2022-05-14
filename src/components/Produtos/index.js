@@ -4,9 +4,17 @@ import styled from "styled-components";
 
 const Card = styled.div``;
 
+const ImgProdutoContainer = styled.div`
+  height: 200px;
+  width: 200px;
+  padding: 10px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+`;
+
 const ImgProduto = styled.img`
-  height: 100%;
-  width: 150px;
+  height: 200px;
 `;
 
 export default class Produtos extends React.Component {
@@ -35,13 +43,15 @@ export default class Produtos extends React.Component {
             );
           })
           .map((product) => (
-            // Componente <Produto />
-
             <Card key={product.id}>
-              <ImgProduto src={product.imageUrl} />
+              <ImgProdutoContainer>
+                <ImgProduto
+                  src={require(`../../data/imgs/${product.imageUrl}.png`)}
+                />
+              </ImgProdutoContainer>
+
               <p>{product.name}</p>
               <p>R${product.value},00</p>
-              {/* <button onClick={() => this.props.addItem(product)}> */}
               <button
                 onClick={() => this.props.adicionarProdutoNoCarrinho(product)}
               >
