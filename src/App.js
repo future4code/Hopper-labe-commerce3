@@ -1,10 +1,14 @@
 import React from "react";
-
+import styled from "styled-components";
 import Filtros from "./components/Filtros";
 import Produtos from "./components/Produtos";
 import Carrinho from "./components/Carrinho";
-
 import jproducts from "./data/products.json";
+
+const ContainerProductsCart = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
 class App extends React.Component {
   state = {
@@ -95,16 +99,18 @@ class App extends React.Component {
           maxPrice={[this.state.filters.maxPrice, this.updateMaxPrice]}
           queryName={[this.state.filters.queryName, this.updateQueryName]}
         />
-        <Produtos
-          products={this.state.products}
-          filters={this.state.filters}
-          addItem={this.addItem}
-          adicionarProdutoNoCarrinho={this.adicionarProdutoNoCarrinho}
-        />
-        <Carrinho
-          carrinho={this.state.carrinho}
-          removeItemFromCart={this.removeItemFromCart}
-        />
+        <ContainerProductsCart>
+          <Produtos
+            products={this.state.products}
+            filters={this.state.filters}
+            addItem={this.addItem}
+            adicionarProdutoNoCarrinho={this.adicionarProdutoNoCarrinho}
+          />
+          <Carrinho
+            carrinho={this.state.carrinho}
+            removeItemFromCart={this.removeItemFromCart}
+          />
+        </ContainerProductsCart>
       </div>
     );
   }
