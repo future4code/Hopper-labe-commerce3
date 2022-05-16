@@ -15,6 +15,7 @@ class Carrinho extends React.Component {
             quantidade={item.quantidade}
             nome={item.name}
             valor={item.value}
+            
             onClick={() => this.props.removeItemFromCart(item)}
           />
         );
