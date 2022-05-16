@@ -10,6 +10,12 @@ const ContainerProductsCart = styled.div`
   justify-content: space-around;
 `;
 
+const Cabecalho = styled.div`
+  display: flex; 
+  justify-content: center;
+  color:#fff;
+`;
+
 class App extends React.Component {
   state = {
     products: jproducts,
@@ -37,12 +43,14 @@ class App extends React.Component {
     });
   };
   adicionarProdutoNoCarrinho = (produto) => {
+    
     const produtoNoCarrinho = this.state.carrinho.filter((item) => {
       if (item.id === produto.id) {
         return item;
       } else {
         return false;
       }
+      
     });
 
     if (produtoNoCarrinho.length === 0) {
@@ -50,7 +58,8 @@ class App extends React.Component {
       const novoCarrinho = [produto, ...this.state.carrinho];
       this.setState({
         carrinho: novoCarrinho,
-      });
+        
+      });localStorage.setItem('itemLS', JSON.stringify(novoCarrinho))
     } else {
       const novoCarrinho = this.state.carrinho.map((item) => {
         if (produto.id === item.id) {
@@ -61,7 +70,7 @@ class App extends React.Component {
       });
       this.setState({
         carrinho: novoCarrinho,
-      });
+      });localStorage.setItem('itemLS', JSON.stringify(novoCarrinho))
     }
   };
   removeItemFromCart = (itemParaRemover) => {
@@ -94,6 +103,10 @@ class App extends React.Component {
     console.log(this.state.carrinho);
     return (
       <div>
+        <Cabecalho>
+          <img src="https://i.ibb.co/DpLGXP7/download-icon-rocket-1326548864851321993-64.png"></img>
+          <h1>Bem vindos</h1>
+        </Cabecalho>
         <Filtros
           minPrice={[this.state.filters.minPrice, this.updateMinPrice]}
           maxPrice={[this.state.filters.maxPrice, this.updateMaxPrice]}

@@ -6,5 +6,9 @@ export const ConjuntoDoCarrinho = styled.div`
   flex-direction: column;
   padding: 10px;
   background-color: #fff;
-  min-width: 300px;
+  min-width: 200px;
+  font-weight: bold;
+  margin-bottom: 250px;
 `;
+
+

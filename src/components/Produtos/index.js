@@ -8,6 +8,11 @@ import {
 } from "./styles";
 
 export default class Produtos extends React.Component {
+
+    guardarTexto = () => {
+
+    }
+    
   render() {
     return (
       <Container>
