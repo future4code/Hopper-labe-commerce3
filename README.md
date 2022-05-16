@@ -1,3 +1,3 @@
 Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
 
-frequent-ladybug.surge.sh
+https://materialistic-cats.surge.sh/
