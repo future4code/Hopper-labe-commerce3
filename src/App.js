@@ -1,26 +1,132 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from "styled-components";
+import Filtros from "./components/Filtros";
+import Produtos from "./components/Produtos";
+import Carrinho from "./components/Carrinho";
+import jproducts from "./data/products.json";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const ContainerProductsCart = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const Cabecalho = styled.div`
+  display: flex; 
+  justify-content: center;
+  color:#fff;
+`;
+
+class App extends React.Component {
+  state = {
+    products: jproducts,
+    filters: {
+      minPrice: "",
+      maxPrice: "",
+      queryName: "",
+    },
+    carrinho: [],
+  };
+
+  updateMinPrice = (ev) => {
+    this.setState({
+      filters: { ...this.state.filters, minPrice: ev.target.value },
+    });
+  };
+  updateMaxPrice = (ev) => {
+    this.setState({
+      filters: { ...this.state.filters, maxPrice: ev.target.value },
+    });
+  };
+  updateQueryName = (ev) => {
+    this.setState({
+      filters: { ...this.state.filters, queryName: ev.target.value },
+    });
+  };
+  adicionarProdutoNoCarrinho = (produto) => {
+    
+    const produtoNoCarrinho = this.state.carrinho.filter((item) => {
+      if (item.id === produto.id) {
+        return item;
+      } else {
+        return false;
+      }
+      
+    });
+
+    if (produtoNoCarrinho.length === 0) {
+      produto.quantidade = 1;
+      const novoCarrinho = [produto, ...this.state.carrinho];
+      this.setState({
+        carrinho: novoCarrinho,
+        
+      });localStorage.setItem('itemLS', JSON.stringify(novoCarrinho))
+    } else {
+      const novoCarrinho = this.state.carrinho.map((item) => {
+        if (produto.id === item.id) {
+          return { ...item, quantidade: item.quantidade + 1 };
+        } else {
+          return item;
+        }
+      });
+      this.setState({
+        carrinho: novoCarrinho,
+      });localStorage.setItem('itemLS', JSON.stringify(novoCarrinho))
+    }
+  };
+  removeItemFromCart = (itemParaRemover) => {
+    if (itemParaRemover.quantidade === 1) {
+      const novoCarrinho = this.state.carrinho.filter((item) => {
+        if (item.id !== itemParaRemover.id) {
+          return item;
+        } else {
+          return false;
+        }
+      });
+      this.setState({
+        carrinho: novoCarrinho,
+      });
+    } else {
+      const novoCarrinho = this.state.carrinho.map((item) => {
+        if (itemParaRemover.id === item.id && item.quantidade >= 1) {
+          return { ...item, quantidade: item.quantidade - 1 };
+        } else {
+          return item;
+        }
+      });
+      this.setState({
+        carrinho: novoCarrinho,
+      });
+    }
+  };
+
+  render() {
+    console.log(this.state.carrinho);
+    return (
+      <div>
+        <Cabecalho>
+          <img src="https://i.ibb.co/DpLGXP7/download-icon-rocket-1326548864851321993-64.png"></img>
+          <h1>Bem vindos</h1>
+        </Cabecalho>
+        <Filtros
+          minPrice={[this.state.filters.minPrice, this.updateMinPrice]}
+          maxPrice={[this.state.filters.maxPrice, this.updateMaxPrice]}
+          queryName={[this.state.filters.queryName, this.updateQueryName]}
+        />
+        <ContainerProductsCart>
+          <Produtos
+            products={this.state.products}
+            filters={this.state.filters}
+            addItem={this.addItem}
+            adicionarProdutoNoCarrinho={this.adicionarProdutoNoCarrinho}
+          />
+          <Carrinho
+            carrinho={this.state.carrinho}
+            removeItemFromCart={this.removeItemFromCart}
+          />
+        </ContainerProductsCart>
+      </div>
+    );
+  }
 }
 
 export default App;

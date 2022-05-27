@@ -1,0 +1,8 @@
+[
+  { "id": 1, "name": "ARIANE 5", "value": 300, "imageUrl": "ARIANE-5" },
+  { "id": 2, "name": "DELTA IV HEAVY", "value": 500, "imageUrl": "DELTA-IV-HEAVY" },
+  { "id": 3, "name": "FALCON 9 FT", "value": 700, "imageUrl": "FALCON-9-FT" },
+  { "id": 4, "name": "FALCON HEAVY", "value": 450, "imageUrl": "FALCON-HEAVY" },
+  { "id": 5, "name": "GSLV MK III", "value": 1200, "imageUrl": "GSLV-MK-III" }
+
+]
